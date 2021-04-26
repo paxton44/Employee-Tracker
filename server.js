@@ -30,7 +30,7 @@ connection.connect((err) => {
 //make prompts for each type of employee (Use activity 13 as a ref)
 //This makes a selector within an array to let the user pick what they want to do
 // then the switch lets the selected option drive the appropriate routes based on user selection
-const runSearch = () => {
+const start = () => {
   inquirer
     .prompt({
       name: 'userSelection',
@@ -87,7 +87,7 @@ const runSearch = () => {
       }
     });
 };
-
+start();
 // //figure out each prompt now that they are setup similar to activity 13
 // const viewCurrentDepartments = () => {
 //   inquirer
