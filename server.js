@@ -22,7 +22,8 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
   if (err) throw err;
   console.log(`connected as id ${connection.threadId}`);
-  start();
+  // why does commenting out start allow the server to connect??
+  // start();
 });
 
 //make code for prompts; look at activity 13/14 for a good example. 
@@ -87,30 +88,30 @@ const runSearch = () => {
     });
 };
 
-//figure out each prompt now that they are setup similar to activity 13
-const viewCurrentDepartments = () => {
-  inquirer
-    .prompt({
-      name: 'artist',
-      type: 'input',
-      message: 'What artist would you like to search for?',
-    })
-    .then((answer) => {
-      const query = 'SELECT position, song, year FROM top5000 WHERE ?';
-      connection.query(query, {
-        artist: answer.artist
-      }, (err, res) => {
-        if (err) throw err;
-        res.forEach(({
-          position,
-          song,
-          year
-        }) => {
-          console.log(
-            `Position: ${position} || Song: ${song} || Year: ${year}`
-          );
-        });
-        runSearch();
-      });
-    });
-};
+// //figure out each prompt now that they are setup similar to activity 13
+// const viewCurrentDepartments = () => {
+//   inquirer
+//     .prompt({
+//       name: 'artist',
+//       type: 'input',
+//       message: 'What artist would you like to search for?',
+//     })
+//     .then((answer) => {
+//       const query = 'SELECT position, song, year FROM top5000 WHERE ?';
+//       connection.query(query, {
+//         artist: answer.artist
+//       }, (err, res) => {
+//         if (err) throw err;
+//         res.forEach(({
+//           position,
+//           song,
+//           year
+//         }) => {
+//           console.log(
+//             `Position: ${position} || Song: ${song} || Year: ${year}`
+//           );
+//         });
+//         runSearch();
+//       });
+//     });
+// };
