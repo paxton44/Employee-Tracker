@@ -21,20 +21,18 @@ const connection = mysql.createConnection({
 //figure out how to connect this to sql 
 connection.connect((err) => {
   if (err) throw err;
+  console.log(`connected as id ${connection.threadId}`);
   start();
 });
 
 //make code for prompts; look at activity 13/14 for a good example. 
-
-//make an array for everything to live in until its called upon
-const team = [];
-
 //make prompts for each type of employee (Use activity 13 as a ref)
 //This makes a selector within an array to let the user pick what they want to do
+// then the switch lets the selected option drive the appropriate routes based on user selection
 const runSearch = () => {
   inquirer
     .prompt({
-      name: 'action',
+      name: 'userSelection',
       type: 'list',
       message: 'What would you like to do?',
       choices: [
@@ -49,7 +47,7 @@ const runSearch = () => {
       ],
     })
     .then((answer) => {
-      switch (data.teamMember) {
+      switch (answer.userSelection) {
         case 'View Current Departments':
           viewCurrentDepartments();
           break;
@@ -82,37 +80,37 @@ const runSearch = () => {
           connection.end();
           break;
 
-        // default:
-        //   console.log(`Invalid action: ${answer.action}`);
-        //   break;
+        default:
+          console.log(`Invalid action: ${answer.action}`);
+          break;
       }
     });
 };
 
 //figure out each prompt now that they are setup similar to activity 13
-const artistSearch = () => {
-//   inquirer
-//     .prompt({
-//       name: 'artist',
-//       type: 'input',
-//       message: 'What artist would you like to search for?',
-//     })
-//     .then((answer) => {
-//       const query = 'SELECT position, song, year FROM top5000 WHERE ?';
-//       connection.query(query, {
-//         artist: answer.artist
-//       }, (err, res) => {
-//         if (err) throw err;
-//         res.forEach(({
-//           position,
-//           song,
-//           year
-//         }) => {
-//           console.log(
-//             `Position: ${position} || Song: ${song} || Year: ${year}`
-//           );
-//         });
-//         runSearch();
-//       });
-//     });
+const viewCurrentDepartments = () => {
+  inquirer
+    .prompt({
+      name: 'artist',
+      type: 'input',
+      message: 'What artist would you like to search for?',
+    })
+    .then((answer) => {
+      const query = 'SELECT position, song, year FROM top5000 WHERE ?';
+      connection.query(query, {
+        artist: answer.artist
+      }, (err, res) => {
+        if (err) throw err;
+        res.forEach(({
+          position,
+          song,
+          year
+        }) => {
+          console.log(
+            `Position: ${position} || Song: ${song} || Year: ${year}`
+          );
+        });
+        runSearch();
+      });
+    });
 };
