@@ -140,3 +140,45 @@ const AddANewRole = () => {
       })
 };
 
+
+//New Employee
+
+const addANewEmployee = () => {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'first_name',
+      message: 'What is the First Name of the New Employee?',
+    },
+    {
+      type: 'input',
+      name: 'last_name',
+      message: 'What is the Last Name of the New Employee?',
+    },
+    {
+      type: 'input',
+      name: 'role_id',
+      message: 'What is the role id of the New Employee?',
+    },
+    {
+      type: 'input',
+      name: 'manager_id',
+      message: 'What is the manager id of the New Employee?',
+    },
+  ])
+      .then((response) => {
+        console.log(response);
+        connection.query('INSERT INTO EmployeeName SET?',
+            {
+              first_name: response.first_name,
+              last_name: response.last_name,
+              role_id: response.role_id,
+              manager_id: response.manager_id,
+            },
+                (err, res) => {
+                  if(err) throw err;
+                  start();
+                }     
+        )
+      })
+};

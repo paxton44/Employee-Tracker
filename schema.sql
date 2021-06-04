@@ -23,8 +23,10 @@ CREATE TABLE EmployeeName(
   id INT AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(100) NOT NULL,
   last_name VARCHAR(45) NOT NULL,
-  role_id INT default 0, 
-  FOREIGN KEY (role_id) REFERENCES EmployeeRole(id), 
-  manager_id INT DEFAULT NULL,
-  FOREIGN KEY (manager_id) REFERENCES EmployeeName(id)
+  role_id INT NOT NULL, 
+  manager_id: INT,
+  PRIMARY KEY(id)
+  -- FOREIGN KEY (role_id) REFERENCES EmployeeRole(id), 
+  -- manager_id INT DEFAULT NULL,
+  -- FOREIGN KEY (manager_id) REFERENCES EmployeeName(id)
   );
