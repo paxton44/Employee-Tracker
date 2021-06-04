@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const inquirer = require('inquirer');
 const { response } = require('express');
 //console table allo)ws us to look at a table of our employee tracker visually instead of just lines of code. 
-// const consoleTable = require('console.table')
+const consoleTable = require('console.table')
 
 //SQL db connection
 const connection = mysql.createConnection({
@@ -91,7 +91,22 @@ const start = () => {
 };
 
 
-//New Department 
+// View Current Departments
+
+const viewCurrentDepartments = () => {
+connection.query('SELECT * FROM department', (err, res) => {
+if (err) throw err;
+//use console table to view entries from the db 
+console.table(res);
+start()
+})
+
+
+};
+
+
+
+// Add New Department 
 
 const addANewDepartment = () => {
   inquirer.prompt([
@@ -116,7 +131,7 @@ const addANewDepartment = () => {
 };
 
 
-//New Role
+// Add New Role
 
 const AddANewRole = () => {
   inquirer.prompt([
@@ -141,7 +156,7 @@ const AddANewRole = () => {
 };
 
 
-//New Employee
+// Add New Employee
 
 const addANewEmployee = () => {
   inquirer.prompt([
