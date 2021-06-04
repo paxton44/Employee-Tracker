@@ -115,3 +115,28 @@ const addANewDepartment = () => {
       })
 };
 
+
+//New Role
+
+const AddANewRole = () => {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'AddANewRole',
+      message: 'What is the Name of the New Role?',
+    }
+  ])
+      .then((response) => {
+        console.log(response.AddANewRole);
+        connection.query('INSERT INTO EmployeeRole SET?',
+            {
+              role_title: response.AddANewRole,
+            },
+                (err, res) => {
+                  if(err) throw err;
+                  start();
+                }     
+        )
+      })
+};
+
