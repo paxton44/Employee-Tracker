@@ -151,15 +151,27 @@ const AddANewRole = () => {
   inquirer.prompt([
     {
       type: 'input',
-      name: 'AddANewRole',
+      name: 'role_title',
       message: 'What is the Name of the New Role?',
-    }
+    },
+    {
+      type: 'input',
+      name: 'role_salary',
+      message: 'What is the Salary of the New Role?',
+    },
+    {
+      type: 'input',
+      name: 'department_id',
+      message: 'What is the Department ID of the New Role?',
+    },
   ])
       .then((response) => {
         console.log(response.AddANewRole);
         connection.query('INSERT INTO EmployeeRole SET?',
             {
-              role_title: response.AddANewRole,
+              role_title: response.role_title,
+              role_salary: response.role_salary,
+              department_id: response.department_id,
             },
                 (err, res) => {
                   if(err) throw err;
