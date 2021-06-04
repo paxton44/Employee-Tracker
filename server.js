@@ -1,7 +1,8 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
-//console table allows us to look at a table of our employee tracker visually instead of just lines of code. 
-const consoleTable = require('console.table')
+const { response } = require('express');
+//console table allo)ws us to look at a table of our employee tracker visually instead of just lines of code. 
+// const consoleTable = require('console.table')
 
 //SQL db connection
 const connection = mysql.createConnection({
@@ -23,7 +24,7 @@ connection.connect((err) => {
   if (err) throw err;
   console.log(`connected as id ${connection.threadId}`);
   // why does commenting out start allow the server to connect??
-  // start();
+  start();
 });
 
 //make code for prompts; look at activity 13/14 for a good example. 
@@ -47,8 +48,8 @@ const start = () => {
         'exit',
       ],
     })
-    .then((answer) => {
-      switch (answer.userSelection) {
+    .then((response) => {
+      switch (response.userSelection) {
         case 'View Current Departments':
           viewCurrentDepartments();
           break;
@@ -77,41 +78,40 @@ const start = () => {
           ChangeEmployeeRole();
           break;
 
-        case 'Exit':
-          connection.end();
-          break;
+        // case 'Exit':
+        //   connection.end();
+        //   break;
 
         default:
-          console.log(`Invalid action: ${answer.action}`);
+          connection.end();
+          console.log(`Invalid action: ${response.action}`);
           break;
       }
     });
 };
-start();
-// //figure out each prompt now that they are setup similar to activity 13
-// const viewCurrentDepartments = () => {
-//   inquirer
-//     .prompt({
-//       name: 'artist',
-//       type: 'input',
-//       message: 'What artist would you like to search for?',
-//     })
-//     .then((answer) => {
-//       const query = 'SELECT position, song, year FROM top5000 WHERE ?';
-//       connection.query(query, {
-//         artist: answer.artist
-//       }, (err, res) => {
-//         if (err) throw err;
-//         res.forEach(({
-//           position,
-//           song,
-//           year
-//         }) => {
-//           console.log(
-//             `Position: ${position} || Song: ${song} || Year: ${year}`
-//           );
-//         });
-//         runSearch();
-//       });
-//     });
-// };
+
+
+//New Department 
+
+const addANewDepartment = () => {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'addANewDepartment',
+      message: 'What is the Name of the New Department?',
+    }
+  ])
+      .then((response) => {
+        console.log(response.addANewDepartment);
+        connection.query('INSERT INTO department SET?',
+            {
+              department_name: response.addANewDepartment,
+            },
+                (err, res) => {
+                  if(err) throw err;
+                  start();
+                }     
+        )
+      })
+};
+
