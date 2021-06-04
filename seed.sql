@@ -8,7 +8,7 @@ VALUES ("IT Manager", $100000, 1), ("Marketing & Sales Director", $85000, 2), ("
 
 -- Creates Employee Name Seeds. 
 INSERT INTO EmployeeName (first_name,last_name,role_id,manager_id)
-VALUES ("Jimi", "Hendrix", 4, NULL), ("Dave", "Mustane", 3, NULL), ("Mick", "Jagger", 2, NULL), ("Trent", "Reznor", 1, NULL);
+VALUES ("Jimi", "Hendrix", 4, 1), ("Dave", "Mustane", 3, 2, ("Mick", "Jagger", 2, 3), ("Trent", "Reznor", 1, 4);
 
 -- Drive The Seeds
 Select * FROM department;

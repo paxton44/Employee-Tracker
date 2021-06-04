@@ -79,12 +79,13 @@ const start = () => {
           break;
 
         // case 'Exit':
-        //   connection.end();
+        //   connection.end(console.log("Your connection is now terminated. Run npm start to restart the application."));
+          
         //   break;
-
+      // default allows the app to close properly without having to make a new case and sequence to initiate exiting  
         default:
           connection.end();
-          console.log(`Invalid action: ${response.action}`);
+          console.log("Your connection is now terminated. Run npm start to restart the application.");
           break;
       }
     });
