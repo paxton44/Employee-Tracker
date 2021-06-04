@@ -119,6 +119,20 @@ const viewCurrentEmployeeRoles = () => {
   };
 
 
+// View Current Employees
+
+const viewCurrentEmployees = () => {
+  connection.query('SELECT * FROM EmployeeName', (err, res) => {
+  if (err) throw err;
+  //use console table to view entries from the db 
+  console.table(res);
+  start()
+  })
+  
+  
+  };
+
+
 
 // Add New Department 
 
@@ -166,7 +180,7 @@ const AddANewRole = () => {
     },
   ])
       .then((response) => {
-        console.log(response.AddANewRole);
+        console.log(response);
         connection.query('INSERT INTO EmployeeRole SET?',
             {
               role_title: response.role_title,
