@@ -26,4 +26,7 @@ CREATE TABLE EmployeeName(
   role_id INT NOT NULL, 
   manager_id: INT,
   PRIMARY KEY(id)
+  -- FOREIGN KEY (role_id) REFERENCES EmployeeRole(id), 
+  -- manager_id INT DEFAULT NULL,
+  -- FOREIGN KEY (manager_id) REFERENCES EmployeeName(id)
   );
