@@ -105,6 +105,20 @@ start()
 };
 
 
+// View Current Employee Roles
+
+const viewCurrentEmployeeRoles = () => {
+  connection.query('SELECT * FROM EmployeeRole', (err, res) => {
+  if (err) throw err;
+  //use console table to view entries from the db 
+  console.table(res);
+  start()
+  })
+  
+  
+  };
+
+
 
 // Add New Department 
 
