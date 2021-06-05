@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
 const { response } = require('express');
-//console table allo)ws us to look at a table of our employee tracker visually instead of just lines of code. 
+//console table allows us to look at a table of our employee tracker visually instead of just lines of code. 
 const consoleTable = require('console.table')
 
 //SQL db connection
